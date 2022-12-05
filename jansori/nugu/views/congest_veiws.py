@@ -47,7 +47,7 @@ def special_date():
 
     # 크리스마스
     elif (datetime.today().month == "12") and (datetime.today().day == "25"):
-        cmessage = " 와 벌써 크리스마스야. 올해가 얼마 남지 않았네. 크리스마스에 나가는 거 너무 좋지만 길거리에 사람이 정말 정말 많을거야. 조심해야해. 밖에 안나가는 것도 좋지."
+        cmessage = " 와 벌써 크리스마스야. 올해가 얼마 남지 않았네. 크리스마스에 나가는 거 너무 좋지만 길거리에 사람이 정말 정말 많을거야. 조심해야해. 밖에 안나가는 것도 하나의 방법이야. 크리스마스는 케빈과 함께!"
 
     # 새해
     elif (datetime.today().month == "12") and (datetime.today().day == "31"):
