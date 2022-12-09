@@ -6,6 +6,7 @@ from rest_framework.generics import get_object_or_404
 from .models import User, Goal, Recent, TurnOn, HomeConnect
 from .serializers import UserSerializer, GoalSerializer, MealSerializer, ExerciseSerializer, CleanSerializer, \
     RecentSerializer, TurnOnSerializer, HomeConnectSerializer
+import datetime
 #from models import Recent, User
 from django.contrib import auth
 
@@ -32,8 +33,16 @@ def usersAPI(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            turnonAPI.serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            print("DB에 저장은 됐음")
+            """
+            TurnOn.objects.create(turnon_id=request.POST.get('user_id'), air_conditioner=0, air_purifier=0, tv=0, robot_clean=0)
+            print("가전 초반 세팅")
+            Recent.objects.create(recent_id=request.POST.get('user_id'), recent_meal=datetime.datetime.now(), recent_exercise=datetime.datetime.now(), recent_clean=datetime.datetime.now())
+            print("최신 생활 데이터 저장")
+            
+            return Response({'success': True}, status=status.HTTP_201_CREATED)
+            """
+            return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -83,9 +92,12 @@ def loginAPI(request):
     if request.method == "POST":
         req_id = request.POST.get('user_id')
         req_pw = request.POST.get('pw')
-
-
-
+        if User.objects.filter(user_id=req_id).exists():
+            user = User.objects.get(user_id=req_id)
+            if req_pw == user.pw:
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
@@ -100,7 +112,7 @@ def goalsAPI(request):
         if serializer.is_valid():
             serializer.save()
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -17,7 +17,7 @@ class GoalSerializer(serializers.ModelSerializer):
 class RecentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recent
-        fields = ['recent_id']
+        fields = ['recent_id', 'recent_meal', 'recent_exercise', 'recent_clean']
 
 
 class MealSerializer(serializers.ModelSerializer):
