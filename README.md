@@ -6,8 +6,8 @@ used language: Python
 Framework: Django
 
 Server distribute: Using 'ngrok'
-
-## NUGU Server
+##
+###NUGU Server
 
 ### Basic features
 
@@ -55,5 +55,48 @@ def msg_for_ex() -> Make a msg for exercise
 
 def msg_for_clean() -> Make a msg for cleaning
 
-## Application Server
+##
+### Application Server
+![Untitled](https://user-images.githubusercontent.com/100753236/208034196-8774830c-fdde-4c69-a12d-19f40e8e1538.png)
 
+### Sign up and login
+Allows users to fill out a membership form and log in through it.
+
+### views.py
+@api_view(['GET', 'POST'])
+
+def userAPI(request)
+
+-> If you send a get request, all user information is given. This is for administrators and cannot be used by the general user. When you send a post request, the information entered by the user is stored in the database.
+
+### models.py
+class User(models.Model):name, user.id, pw, location, objects()
+
+-> It is a user object that receives name, ID, password, and location information.
+
+### serializers.py
+class UserSerializer(serializers.ModelSerializer):
+  ...
+  fields = ['name', 'user_id', 'pw', 'location']
+
+-> It plays a role in changing the data type received by post to a data type that can be understood by Django.
+
+### Set the goal
+Allows users to set a goal.
+
+### views.py
+@api_view(['GET', 'POST'])
+
+def goalsAPI(request)
+
+-> 
+
+### models.py
+class Goal(models.Model):goal_id, meal, exercise, clean, objects()
+
+-> It is a user object that receives aim number of meals a day, cleaning cycle, exercise cycle
+
+### serializers.py
+class GoalSerializer(serializers.ModelSerializer):
+  ...
+  fields = ['goal_id', 'meal', 'exercise', 'clean']
