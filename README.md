@@ -89,7 +89,7 @@ Allows users to set a goal.
 
 def goalsAPI(request)
 
--> 
+-> you can use get requests to retrieve the goal information of a specific user, and you can modify or enter the goal of a user through a post request.
 
 ### models.py
 class Goal(models.Model):goal_id, meal, exercise, clean, objects()
